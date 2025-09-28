@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Keypad : Interactable
+{
+    [SerializeField]
+    private GameObject door;
+    private bool doorOpen;
+    // Start is called before the first frame update
+    void Start()
+    {
+        doorOpen = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (doorOpen)
+        {
+            promptMessage = "Close Door [E]";
+        }
+        else
+        {
+            promptMessage = "Open Door [E]";
+        }
+    }
+
+    public override void Interact()
+    {
+        Debug.Log("Interacted with: " + gameObject.name);
+        doorOpen = !doorOpen;
+        door.GetComponent<Animator>().SetBool("IsOpen", doorOpen);
+    }
+}
